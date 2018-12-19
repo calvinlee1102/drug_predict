@@ -27,21 +27,23 @@
             var classSort = classId.slice();
             classSort.sort();
             topk = 10;
-            var topkArray = new Array();
+            var topkArrayIndex = new Array();
+            var topkArrayP = new Array();
             for (i = 1; i <= topk; i++) {
                 for (j = 0; j < classSort.length; j++) {
                     if (classSort[classSort.length - i]==classId[j]) {
-                        topkArray[i-1] = j;
+                        topkArrayIndex[i - 1] = j;
+                        topkArrayP[i - 1] = classId[j];
                         break;
                     }
                 }
             }
-            document.getElementById('testdrugvalue').innerHTML = topkArray;
+            document.getElementById('testdrugvalue').innerHTML = topkArrayP;
         }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識81</h1>
+    <h1>全台最強藥物辨識82</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

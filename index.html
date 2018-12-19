@@ -8,20 +8,26 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.14.1/dist/tf.min.js"></script>
     <script type="text/javascript">
         async function loadMobilenet() {
-            document.getElementById('testdrugvalue').innerHTML = 'stat2';
+            document.getElementById('testdrugvalue').innerHTML = 'stat3';
             const mobilenet = await tf.loadModel(
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const batchedImage = croppedImage.expandDims(0);
             alert(mobilenet.predict(batchedImage));
-        };
+            return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
+        }
+        function changetest() {
+            document.getElementById('testdrugvalue').innerHTML = 'stat3';
+        }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識37</h1>
+    <h1>全台最強藥物辨識38</h1>
     <div id="my_camera"></div>
     <a id="testdrugvalue">no</a>
-    <img id="storeimg" style="visibility:hidden; width:0;height:0;" onchange="loadMobilenet();">
+    <div style="visibility:hidden; width:0;height:0;">
+        <img id="storeimg" onchange="loadMobilenet();">
+    </div>
     <script language="JavaScript">
         Webcam.set({
             width: 500,
@@ -31,6 +37,7 @@
         });
         Webcam.attach('#my_camera');
         Webcam.attach('#storeimg');
+        document.getElementById('testdrugvalue').innerHTML = 'stat2';
     </script>
 </body>
 </html>

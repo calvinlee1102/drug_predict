@@ -5,17 +5,23 @@
     <title>WebcamJS Test Page</title>
     <style type="text/css"></style>
     <script type="text/javascript" src="webcam.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.14.1/dist/tf.min.js"> </script>
     <script type="text/javascript">
         async function loadMobilenet() {
             const mobilenet = await tf.loadModel(
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         };
-
+        const predictedClass = tf.tidy(() => {
+            const img = webcam.capture();
+            const activation = mobilenet.predict(img);
+            const predictions = model.predict(activation);
+            return predictions.as1D().argMax();
+        });
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識6</h1>
+    <h1>全台最強藥物辨識7</h1>
     <div id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({

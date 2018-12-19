@@ -9,7 +9,7 @@
   <script>
     navigator.getUserMedia = navigator.getUserMedia || navigatorAny.webkitGetUserMedia || navigatorAny.mozGetUserMedia || navigatorAny.msGetUserMedia;
   if (navigator.getUserMedia) {
-   navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
+   navigator.getUserMedia({ audio: true, video: { width: 720, height: 720 } },
       function(stream) {
          var video = document.querySelector('video');
          video.srcObject = stream;
@@ -24,6 +24,7 @@
 } else {
    console.log("getUserMedia not supported");
 }
+    
   </script>
   
 </head>
@@ -34,12 +35,11 @@
 
         <div class="webcam-box-outer">
           <div class="webcam-box-inner">
-            <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+            <video autoplay playsinline muted id="webcam" width="720" height="720"></video>
           </div>
         </div>
 
-  <script src="https://storage.googleapis.com/tfjs-examples/assets/webcam-transfer-learning/pacman-google.js"></script>
-  <script src="index.js"></script>
-  <script src="webcam-transfer-learning.ce85ae98.js"></script>
+
+  <script src="webcam.js"></script>
 </body>
 </html>

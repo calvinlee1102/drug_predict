@@ -25,13 +25,10 @@
             alert(mobilenet.predict(batchedImage));
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         }
-        function changetest() {
-            document.getElementById('testdrugvalue').innerHTML = 'stat3';
-        }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識50</h1>
+    <h1>全台最強藥物辨識51</h1>
     <div id="my_camera"></div>
     <a id="testdrugvalue">no</a>
     <div>
@@ -44,7 +41,6 @@
             image_format: 'jpeg',
             jpeg_quality: 90
         });
-        Webcam.attach('#my_camera');
         Webcam.snap(function (data_uri) {
             document.getElementById('storeimg').src = data_uri;
             loadMobilenet();

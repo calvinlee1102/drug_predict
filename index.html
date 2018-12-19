@@ -13,16 +13,16 @@
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const batchedImage = croppedImage.expandDims(0);
             alert(mobilenet.predict(batchedImage));
-            document.getElementById('test').innerHTML == '156asd';
+            document.getElementById('testdrugvalue').innerHTML == '156asd';
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         };
-        document.getElementById('test').innerText = 654;
+        document.getElementById('testdrugvalue').innerHTML = 'asdaweawerg';
     </script>
 </head>
 <body>
     <h1>全台最強藥物辨識31</h1>
     <div id="my_camera"></div>
-    <a id="test">no</a>
+    <a id="testdrugvalue">no2</a>
     <img id="storeimg" style="visibility:hidden;" onchange="loadMobilenet();">
     <script language="JavaScript">
         Webcam.set({

@@ -11,12 +11,7 @@
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         };
-        const predictedClass = tf.tidy(() => {
-            const img = webcam.capture();
-            const activation = mobilenet.predict(img);
-            const predictions = model.predict(activation);
-            return predictions.as1D().argMax();
-        });
+
     </script>
 </head>
 <body>

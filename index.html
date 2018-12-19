@@ -13,7 +13,7 @@
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         };
         const predictedClass = tf.tidy(() => {
-            const img = webcam.capture();
+            const img = Webcam.capture();
             const activation = mobilenet.predict(img);
             const predictions = model.predict(activation);
             return predictions.as1D().argMax();
@@ -21,7 +21,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識7</h1>
+    <h1>全台最強藥物辨識8</h1>
     <div id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({

@@ -7,11 +7,20 @@
     <script type="text/javascript" src="webcam.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.14.1/dist/tf.min.js"></script>
     <script type="text/javascript">
+        cropImage(img) {
+            const size = Math.min(img.shape[0], img.shape[1]);
+            const centerHeight = img.shape[0] / 2;
+            const beginHeight = centerHeight - (size / 2);
+            const centerWidth = img.shape[1] / 2;
+            const beginWidth = centerWidth - (size / 2);
+            return img.slice([beginHeight, beginWidth, 0], [size, size, 3]);
+        }
         async function loadMobilenet() {
             const mobilenet = await tf.loadModel(
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
-            const batchedImage = webcamImage.expandDims(0);
+            const croppedImage = this.cropImage(webcamImage);
+            const batchedImage = croppedImage.expandDims(0);
             document.getElementById('testdrugvalue').innerHTML = 'stat4';
             alert(mobilenet.predict(batchedImage));
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
@@ -22,11 +31,11 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識42</h1>
+    <h1>全台最強藥物辨識43</h1>
     <div id="my_camera"></div>
     <a id="testdrugvalue">no</a>
-    <div style="visibility:hidden; width:0;height:0;">
-        <img id="storeimg" onchange="loadMobilenet(); changetest();" onload="changetest();">
+    <div style="visibility:hidden; width:0;height:0;" onchange="loadMobilenet(); changetest();">
+        <img id="storeimg" onchange="loadMobilenet(); changetest();">
     </div>
     <script language="JavaScript">
         Webcam.set({

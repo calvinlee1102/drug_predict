@@ -10,14 +10,17 @@
         async function loadMobilenet() {
             const mobilenet = await tf.loadModel(
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
-            mobilenet.predict(document.getElementById("my_camera")).print();
+            const webcamImage = tf.fromPixels(document.getElementById("my_camera"));
+            const croppedImage = this.cropImage(webcamImage);
+            const batchedImage = croppedImage.expandDims(0);
+            mobilenet.predict(batchedImage).print();
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         };
         loadMobilenet();
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識16</h1>
+    <h1>全台最強藥物辨識17</h1>
     <div id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({

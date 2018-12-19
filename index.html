@@ -21,14 +21,13 @@
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const batchedImage = croppedImage.expandDims(0);
-            document.getElementById('testdrugvalue').innerHTML = 'stat4';
-            alert(mobilenet.predict(batchedImage));
+            document.getElementById('testdrugvalue').innerHTML = mobilenet.predict(batchedImage);
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識56</h1>
+    <h1>全台最強藥物辨識57</h1>
     <button onclick="take_snapshot();" style="font-size:20pt;">照一張藥錠</button>
     <a id="testdrugvalue">no</a>
     <div>

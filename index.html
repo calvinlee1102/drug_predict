@@ -13,13 +13,15 @@
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const batchedImage = croppedImage.expandDims(0);
             alert(mobilenet.predict(batchedImage));
+            document.getElementById('test').value = '156asd';
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         };
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識22</h1>
+    <h1>全台最強藥物辨識23</h1>
     <div id="my_camera"></div>
+    <input type="text" value="" id="test"/>
     <img id="storeimg" onchange="loadMobilenet();">
     <script language="JavaScript">
         Webcam.set({

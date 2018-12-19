@@ -23,14 +23,14 @@
             const batchedImage = croppedImage.expandDims(0);
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
             const classId = (await mobilenet.predict(batchedImage).as1D().data());
-            document.getElementById('testdrugvalue').innerHTML = classId[10];
+            document.getElementById('testdrugvalue').innerHTML = classId[classId.length];
             
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識68</h1>
+    <h1>全台最強藥物辨識69</h1>
     <button onclick="take_snapshot();" style="font-size:20;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

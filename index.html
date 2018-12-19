@@ -26,22 +26,13 @@
             const classId = (await mobilenet.predict(batchedImage).as1D().data());
             var classSort = classId.slice();
             classSort.sort();
-            topk = 10;
-            var topkArray = new Array();
-            for (i = 1; i < topk; i++) {
-                for (j = 0; j < classSort.length; j++) {
-                    if (classSort[classSort.length - i]==classId[j]) {
-                        topkArray[i-1] = j;
-                        break;
-                    }
-                }
-            }
-            document.getElementById('testdrugvalue').innerHTML = topkArray;
+
+            document.getElementById('testdrugvalue').innerHTML = classSort;
         }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識80</h1>
+    <h1>全台最強藥物辨識79</h1>
     <button onclick="take_snapshot();" style="font-size:20;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

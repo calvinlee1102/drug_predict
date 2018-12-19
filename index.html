@@ -10,12 +10,25 @@
             const mobilenet = await tf.loadModel(
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
-        });
+        };
+        while (isPredicting) {
+            const predictedClass = tf.tidy(() => {
+                const img = webcam.capture();
+                const activation = mobilenet.predict(img);
+                const predictions = model.predict(activation);
+                return predictions.as1D().argMax();
+            });
 
+            const classId = (await predictedClass.data())[0];
+            predictedClass.dispose();
+
+            ui.predictClass(classId);
+            await tf.nextFrame();
+        }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識1</h1>
+    <h1>全台最強藥物辨識</h1>
     <div id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({

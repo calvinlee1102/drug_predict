@@ -22,15 +22,13 @@
             const croppedImage = this.cropImage(webcamImage);
             const batchedImage = croppedImage.expandDims(0);
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
-            const classId = (await mobilenet.predict(batchedImage).as1D().data());
-            document.getElementById('testdrugvalue').innerHTML = classId[classId.length-1];
-            
-            return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
+            const classId = (await mobilenet.predict(batchedImage).as1D().data());            
+            return classId;
         }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識70</h1>
+    <h1>全台最強藥物辨識71</h1>
     <button onclick="take_snapshot();" style="font-size:20;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">
@@ -48,7 +46,8 @@
         function take_snapshot() {
             Webcam.snap(function (data_uri) {
                 document.getElementById('storeimg').src = data_uri;
-                loadMobilenet();
+                const classArray = loadMobilenet();
+                document.getElementById('testdrugvalue').innerHTML = classArray
             });
         }
     </script>

@@ -16,7 +16,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識12</h1>
+    <h1>全台最強藥物辨識13</h1>
     <div id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({
@@ -26,12 +26,7 @@
             jpeg_quality: 90
         });
         Webcam.attach('#my_camera');
-          const predictedClass = tf.tidy(() => {
-            const img = Webcam.capture();
-            const activation = mobilenet.predict(img);
-            const predictions = model.predict(activation);
-            return predictions.as1D().argMax();
-          });
+        mobilenet.predict(document.getElementById("my_camera").print();
     </script>
 </body>
 </html>

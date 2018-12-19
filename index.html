@@ -7,21 +7,14 @@
     <script type="text/javascript" src="webcam.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.14.1/dist/tf.min.js"> </script>
     <script type="text/javascript">
-        async function loadMobilenet() {
-            const mobilenet = await tf.loadModel(
-                'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
-            return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
-        };
-        const predictedClass = tf.tidy(() => {
-            const img = Webcam.capture();
-            const activation = mobilenet.predict(img);
-            const predictions = model.predict(activation);
-            return predictions.as1D().argMax();
-        });
+        const mobilenet = await tf.loadModel(
+            'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
+        return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
+        mobilenet.predict(tf.tensor2d([5], [1, 1])).print();
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識8</h1>
+    <h1>全台最強藥物辨識9</h1>
     <div id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({

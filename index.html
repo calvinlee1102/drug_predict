@@ -31,7 +31,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識48</h1>
+    <h1>全台最強藥物辨識49</h1>
     <div id="my_camera"></div>
     <a id="testdrugvalue">no</a>
     <div>
@@ -47,7 +47,7 @@
         Webcam.attach('#my_camera');
         Webcam.attach('#storeimg');
         Webcam.snap(function (data_uri) {
-            document.getElementById('storeimg').src = data_uri;.
+            document.getElementById('storeimg').src = data_uri;
             loadMobilenet();
         });
         document.getElementById('testdrugvalue').innerHTML = 'stat2';

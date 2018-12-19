@@ -26,12 +26,14 @@
             jpeg_quality: 90
         });
         Webcam.attach('#my_camera');
-        mobilenet.predict(Webcam.set({
+        mobilenet.predict(
+        tf.fromPixels(Webcam.set({
             width: 500,
             height: 500,
             image_format: 'jpeg',
             jpeg_quality: 90
-        })).print();
+        }))
+        ).print();
     </script>
 </body>
 </html>

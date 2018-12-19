@@ -13,7 +13,7 @@
             const beginHeight = centerHeight - (size / 2);
             const centerWidth = img.shape[1] / 2;
             const beginWidth = centerWidth - (size / 2);
-            return img.slice([beginHeight, beginWidth, 0], [size, size, 3]);
+            return img.slice([beginHeight, beginWidth, 0], [224, 224, 3]);
         }
         async function loadMobilenet() {
             const mobilenet = await tf.loadModel(
@@ -31,11 +31,11 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識44</h1>
+    <h1>全台最強藥物辨識45</h1>
     <div id="my_camera"></div>
     <a id="testdrugvalue">no</a>
-    <div style="visibility:hidden; width:0;height:0;" onchange="loadMobilenet(); changetest();">
-        <img id="storeimg" onchange="loadMobilenet(); changetest();">
+    <div style="visibility:hidden; width:0;height:0;">
+        <img id="storeimg" onloadend="loadMobilenet(); changetest();">
     </div>
     <script language="JavaScript">
         Webcam.set({

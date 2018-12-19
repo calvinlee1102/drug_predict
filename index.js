@@ -38,7 +38,7 @@ let model;
 // we'll use as input to our classifier model.
 async function loadTruncatedMobileNet() {
   const mobilenet = await tf.loadModel(
-      'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json');
+      'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
 
   // Return a model that outputs an internal activation.
   const layer = mobilenet.getLayer('conv_pw_13_relu');

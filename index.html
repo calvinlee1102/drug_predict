@@ -28,10 +28,10 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識51</h1>
+    <h1>全台最強藥物辨識52</h1>
     <div id="my_camera"></div>
     <a id="testdrugvalue">no</a>
-    <div>
+    <div style="visibility:hidden;width:0;height:0;">
         <img id="storeimg">
     </div>
     <script language="JavaScript">
@@ -41,6 +41,7 @@
             image_format: 'jpeg',
             jpeg_quality: 90
         });
+        Webcam.attach('#my_camera');
         Webcam.snap(function (data_uri) {
             document.getElementById('storeimg').src = data_uri;
             loadMobilenet();

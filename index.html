@@ -26,8 +26,17 @@
             const classId = (await mobilenet.predict(batchedImage).as1D().data());
             var classSort = classId.slice();
             classSort.sort();
-
-            document.getElementById('testdrugvalue').innerHTML = classSort;
+            topk = 10;
+            var topkArray = new Array();
+            for (i = 1; i < topk; i++) {
+                for (j = 0; j < classSort.length; j++) {
+                    if (classSort[classSort.length - i]==classId[j]) {
+                        topkArray[i-1] = j;
+                        break;
+                    }
+                }
+            }
+            document.getElementById('testdrugvalue').innerHTML = topkArray;
         }
     </script>
 </head>

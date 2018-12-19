@@ -28,7 +28,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識71</h1>
+    <h1>全台最強藥物辨識72</h1>
     <button onclick="take_snapshot();" style="font-size:20;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">
@@ -46,8 +46,8 @@
         function take_snapshot() {
             Webcam.snap(function (data_uri) {
                 document.getElementById('storeimg').src = data_uri;
-                const classArray = loadMobilenet();
-                document.getElementById('testdrugvalue').innerHTML = classArray
+                classId = loadMobilenet();
+                document.getElementById('testdrugvalue').innerHTML = classId
             });
         }
     </script>

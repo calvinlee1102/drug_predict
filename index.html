@@ -24,13 +24,14 @@
             const batchedImage = resized.expandDims(0);
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
             const classId = (await mobilenet.predict(batchedImage).as1D().data());
-            
-            document.getElementById('testdrugvalue').innerHTML = classId.length;
+            var classSort = classId.slice();
+            classSort.sort();
+            document.getElementById('testdrugvalue').innerHTML = classSort;
         }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識77</h1>
+    <h1>全台最強藥物辨識78</h1>
     <button onclick="take_snapshot();" style="font-size:20;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

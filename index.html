@@ -13,12 +13,12 @@
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const batchedImage = croppedImage.expandDims(0);
-            return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
+            alert(mobilenet.predict(batchedImage));
         };
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識36</h1>
+    <h1>全台最強藥物辨識37</h1>
     <div id="my_camera"></div>
     <a id="testdrugvalue">no</a>
     <img id="storeimg" style="visibility:hidden; width:0;height:0;" onchange="loadMobilenet();">

@@ -13,13 +13,14 @@
             const beginHeight = centerHeight - (size / 2);
             const centerWidth = img.shape[1] / 2;
             const beginWidth = centerWidth - (size / 2);
-            return img.slice([beginHeight, beginWidth, 0], [224, 224, 3]);
+            return img.slice([beginHeight, beginWidth, 0], [size, size, 3]);
         }
         async function loadMobilenet() {
             const mobilenet = await tf.loadModel(
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
-            const croppedImage = this.cropImage(webcamImage);
+            const resized = tf.image.resizeBilinear(webcamImage, [224, 224]).toFloat()
+            const croppedImage = this.cropImage(resized);
             const batchedImage = croppedImage.expandDims(0);
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
             const classId = (await mobilenet.predict(batchedImage).as1D().data());
@@ -29,7 +30,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識75</h1>
+    <h1>全台最強藥物辨識76</h1>
     <button onclick="take_snapshot();" style="font-size:20;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

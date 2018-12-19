@@ -6,21 +6,21 @@
     <style type="text/css"></style>
     <script type="text/javascript" src="webcam.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.14.1/dist/tf.min.js"></script>
-    <script>
+    <script type="text/javascript">
         async function loadMobilenet() {
             const mobilenet = await tf.loadModel(
                 'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const batchedImage = croppedImage.expandDims(0);
             alert(mobilenet.predict(batchedImage));
-            document.getElementById('test').innerHTML = '156asd';
+            document.getElementById('test').innerHTML == '156asd';
             return tf.model({ inputs: mobilenet.inputs, outputs: mobilenet.output });
         };
-        document.getElementById('test').innerHTML = '156asdasdasda';
+        document.getElementById('test').innerHTML == '156asdasdasda';
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識28</h1>
+    <h1>全台最強藥物辨識29</h1>
     <div id="my_camera"></div>
     <a id="test">no</a>
     <img id="storeimg" style="visibility:hidden;" onchange="loadMobilenet();">

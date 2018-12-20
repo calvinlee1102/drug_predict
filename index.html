@@ -5,6 +5,7 @@
     <title>WebcamJS Test Page</title>
     <style type="text/css"></style>
     <script type="text/javascript" src="webcam.js"></script>
+    <script src="classmap.js" charset="big5"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.14.1/dist/tf.min.js"></script>
     <script type="text/javascript">
         function cropImage(img) {
@@ -29,6 +30,7 @@
             const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
+            document.getElementById('testdrugvalue').innerHTML = classMap[0];
             stopCount();
         }
         loadNet();
@@ -64,7 +66,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識128</h1>
+    <h1>全台最強藥物辨識129</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

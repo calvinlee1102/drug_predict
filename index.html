@@ -15,12 +15,13 @@
             const beginWidth = centerWidth - (size / 2);
             return img.slice([beginHeight, beginWidth, 0], [size, size, 3]);
         }
-        var mobilenet = null;
+        modelb=0;
         async function loadMobilenet() {
-            if (typeof mobilenet == "null") {
-                const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
+            if (modelb == 0) {
+                
                 alert('loaded');
             }
+            const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat()

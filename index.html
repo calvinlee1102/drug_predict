@@ -18,6 +18,7 @@
         async function loadNet() {
             const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json', 'indexeddb://cloned-model');
+            document.getElementById('testdrugvalue').innerHTML = '載入完成';
         }
         loadNet();
         async function loadMobilenet() {
@@ -49,12 +50,12 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識118</h1>
+    <h1>全台最強藥物辨識119</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">
     </div><br />
-    <a id="testdrugvalue">no</a>
+    <a id="testdrugvalue" style="font-size:28pt;">模型載入中...</a>
     <input name="json-upload" type="file" />
     <input name="weights-upload" type="file" />
     <div style="visibility:hidden;width:0;height:0;" id="my_camera"></div>

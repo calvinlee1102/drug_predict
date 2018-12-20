@@ -18,10 +18,9 @@
         }
         async function loadMobilenet() {
             if (isModelLoaded == 0) {
-               const mobilenet = await tf.loadModel(
-                    'https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
-               isModelLoaded = 1;
+                alert('in');
             }
+            const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat()

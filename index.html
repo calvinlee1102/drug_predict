@@ -35,7 +35,7 @@
                     if (classSort[classSort.length - i]==classId[j]) {
                         topkArrayIndex[i - 1] = j;
                         topkArrayP[i - 1] = classId[j];
-                        classStr += 'class' + j + ': ' + classId[j] + '</br>';
+                        classStr += 'class' + j + ': ' + (classId[j]*100).toFixed(1) + '%' + '<br />';
                         break;
                     }
                 }
@@ -45,7 +45,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識83</h1>
+    <h1>全台最強藥物辨識85</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

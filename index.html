@@ -36,7 +36,7 @@
             const mobilenet = await tf.loadModel('indexeddb://cloned-model');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
-            const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat()
+            const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat();
             const batchedImage = resized.expandDims(0);
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
             const classId = (await mobilenet.predict(batchedImage).as1D().data());
@@ -58,15 +58,19 @@
             }
             document.getElementById('testdrugvalue').innerHTML = classStr;
         }
+        function drugpicUpload() {
+            document.getElementById('storeimg').value = document.getElementById('picUpid').value;
+        }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識127</h1>
+    <h1>全台最強藥物辨識128</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">
     </div><br />
     <a id="testdrugvalue" style="font-size:28pt;">模型載入中...</a>
+    <br /><input id="picUpid" type="file" value="上傳圖片" onchange="drugpicUpload();" />
     <div style="visibility:hidden;width:0;height:0;" id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({

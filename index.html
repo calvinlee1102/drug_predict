@@ -16,9 +16,10 @@
             return img.slice([beginHeight, beginWidth, 0], [size, size, 3]);
         }
         modelb=0;
-        const mobilenet;
+        const mobilenet = tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
+        alert(mobilenet);
         async function loadMobilenet() {
-            if (modelb == 0) {
+            if (modelb == 1) {
                 const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
                 alert(mobilenet);
             }
@@ -49,7 +50,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識108</h1>
+    <h1>全台最強藥物辨識109</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

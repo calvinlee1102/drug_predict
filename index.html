@@ -17,7 +17,7 @@
         }
         async function loadNet() {
             const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json');
-            await model.save('localstorage://browsermodel');
+            await mobilenet.save('localstorage://browsermodel');
         }
         loadNet();
         
@@ -50,7 +50,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識111</h1>
+    <h1>全台最強藥物辨識112</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

@@ -30,7 +30,7 @@
             const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_InceptionV3/model.json');
             tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
-            document.getElementById('testdrugvalue').innerHTML = classMap[0];
+            classMap[0];
             stopCount();
         }
         loadNet();
@@ -47,13 +47,13 @@
             topk = 10;
             var topkArrayIndex = new Array();
             var topkArrayP = new Array();
-            var classStr = "";
+            var classStr = '共收錄' + classSort.length + '種藥品<br />';
             for (i = 1; i <= topk; i++) {
                 for (j = 0; j < classSort.length; j++) {
                     if (classSort[classSort.length - i] == classId[j]) {
                         topkArrayIndex[i - 1] = j;
                         topkArrayP[i - 1] = classId[j];
-                        classStr += 'class' + j + ': ' + (classId[j] * 100).toFixed(1) + '%' + '<br />';
+                        classStr += classMap[j] + ': ' + (classId[j] * 100).toFixed(1) + '%' + '<br />';
                         break;
                     }
                 }
@@ -66,7 +66,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識135</h1>
+    <h1>全台最強藥物辨識136</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

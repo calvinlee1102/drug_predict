@@ -50,13 +50,13 @@
         async function jsonchange() {
             document.getElementById('testdrugvalue').innerHTML = '載入中...';
             const jsonUpload = document.getElementById('jsonupload');
-            const model = await tf.loadFrozenModel(tf.io.browserFiles([jsonUpload.files[0]]));
+            const model = await tf.loadModel(tf.io.browserFiles([jsonUpload.files[0]]));
             document.getElementById('testdrugvalue').innerHTML = '載入完成';
         }
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識122</h1>
+    <h1>全台最強藥物辨識123</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

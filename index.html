@@ -29,7 +29,6 @@
             timedCount();
             tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_MobileNetV2/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
-            classMap[0];
             stopCount();
         }
         loadNet();
@@ -65,7 +64,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識139</h1>
+    <h1>全台最強藥物辨識140</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

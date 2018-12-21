@@ -8,8 +8,6 @@
     <script src="classmap.js" charset="big5"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.14.1/dist/tf.min.js"></script>
     <script type="text/javascript">
-        import * as tf from '@tensorflow/tfjs';
-        import '@tensorflow/tfjs-node-gpu';
         function cropImage(img) {
             const size = Math.min(img.shape[0], img.shape[1]);
             const centerHeight = img.shape[0] / 2;
@@ -71,7 +69,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識159</h1>
+    <h1>全台最強藥物辨識160</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

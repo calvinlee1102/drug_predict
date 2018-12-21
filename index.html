@@ -33,7 +33,7 @@
         }
         loadNet();
         function loadMobilenet() {
-            const mobilenet = tf.loadModel('indexeddb://cloned-model');
+            const mobilenet = await tf.loadModel('indexeddb://cloned-model');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat();
@@ -65,7 +65,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識161</h1>
+    <h1>全台最強藥物辨識162</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

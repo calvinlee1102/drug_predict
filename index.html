@@ -27,8 +27,10 @@
         }
         async function loadNet() {
             timedCount();
-            await tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_MobileNetV2/model.json', 'indexeddb://cloned-model');
+            const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_InceptionV3/model.json');
+            tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
+            classMap[0];
             stopCount();
         }
         loadNet();
@@ -38,8 +40,8 @@
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat();
             const batchedImage = resized.expandDims(0);
-            const classId = (await mobilenet.predict(batchedImage).as1D().data());
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
+            const classId = (await mobilenet.predict(batchedImage).as1D().data());
             var classSort = classId.slice();
             classSort.sort();
             topk = 10;
@@ -57,11 +59,6 @@
                 }
             }
             document.getElementById('testdrugvalue').innerHTML = classStr;
-            mobilenet.dispose();
-            webcamImage.dispose();
-            croppedImage.dispose();
-            resized.dispose();
-            batchedImage.dispose();
         }
         function drugpicUpload() {
             document.getElementById('storeimg').value = document.getElementById('picUpid').value;
@@ -69,7 +66,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識160</h1>
+    <h1>全台最強藥物辨識161</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">

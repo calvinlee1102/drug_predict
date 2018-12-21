@@ -33,14 +33,13 @@
         }
         loadNet();
         async function loadMobilenet() {
-            var mobilenet = await tf.loadModel('indexeddb://cloned-model');
+            const mobilenet = await tf.loadModel('indexeddb://cloned-model');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat();
             const batchedImage = resized.expandDims(0);
             const classId = (await mobilenet.predict(batchedImage).as1D().data());
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
-            mobilenet = null;
             var classSort = classId.slice();
             classSort.sort();
             topk = 10;
@@ -75,8 +74,8 @@
     <div style="visibility:hidden;width:0;height:0;" id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({
-            width: 500,
-            height: 500,
+            width: 300,
+            height: 300,
             image_format: 'jpeg',
             jpeg_quality: 90
         });

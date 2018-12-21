@@ -33,12 +33,15 @@
         }
         loadNet();
         async function loadMobilenet() {
-            const mobilenet = await tf.loadModel('indexeddb://cloned-model');
-            const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
-            const croppedImage = this.cropImage(webcamImage);
-            const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat();
-            const batchedImage = resized.expandDims(0);
-            const classId = (await mobilenet.predict(batchedImage).as1D().data());
+            const classId = tf.tidy(() => {
+                const mobilenet = tf.loadModel('indexeddb://cloned-model');
+                const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
+                const croppedImage = this.cropImage(webcamImage);
+                const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat();
+                const batchedImage = resized.expandDims(0);
+                const classIdin = (mobilenet.predict(batchedImage).as1D().data());
+                return classIdin;
+            });
             document.getElementById('testdrugvalue').innerHTML = 'stat2';
             var classSort = classId.slice();
             classSort.sort();
@@ -64,7 +67,7 @@
     </script>
 </head>
 <body>
-    <h1>全台最強藥物辨識153</h1>
+    <h1>全台最強藥物辨識156</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;">照一張藥錠</button><br />
     <div>
         <img id="storeimg">
@@ -74,8 +77,8 @@
     <div style="visibility:hidden;width:0;height:0;" id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({
-            width: 300,
-            height: 300,
+            width: 500,
+            height: 500,
             image_format: 'jpeg',
             jpeg_quality: 90
         });

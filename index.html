@@ -30,8 +30,9 @@
         var predicted = 0;
         function timedCount() {
             c = c + 1;
-            if (predicted==1) {
+            if (predicted == 1) {
                 cleanModel();
+                predicted = 0;
             }
             t = setTimeout("timedCount()", 1000);
         }

@@ -51,6 +51,7 @@
             alert(batchedImage);
             return mobilenet.predict(batchedImage).as1D().data();
         }
+        preclassId();
         async function loadMobilenet() {
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
             classId = await preclassId();

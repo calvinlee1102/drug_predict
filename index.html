@@ -40,7 +40,7 @@
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
         }
         loadNet();
-        async function loadMobilenet2() {
+        async function loadMobilenet() {
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
             tf.setBackend('cpu',true);
             const mobilenet = await tf.loadModel('indexeddb://cloned-model');

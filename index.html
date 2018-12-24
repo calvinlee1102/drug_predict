@@ -75,7 +75,7 @@
     </script>
 </head>
 <body>
-    <h1 class="center" style="font-size:36pt;">全台最強藥物辨識255</h1>
+    <h1 class="center" style="font-size:36pt;">全台最強藥物辨識256</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;" class="center">照一張藥錠</button><br />
     <div align="center">
         <img id="storeimg">
@@ -83,6 +83,7 @@
     <a id="testdrugvalue" style="font-size:28pt;">模型載入中...</a><br />
     <a id="enginemode" style="font-size:28pt;">Engine type</a>
     <br /><input id="picUpid" type="file" value="上傳圖片" onchange="drugpicUpload();" />
+    <input type="button" value="清除" onclick="tf.disposeVariables();" style="font-size:28pt;" />
     <div style="visibility:hidden;width:0;height:0;" id="my_camera"></div>
     <script language="JavaScript">
         Webcam.set({

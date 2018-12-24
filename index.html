@@ -31,7 +31,6 @@
         function timedCount() {
             c = c + 1;
             t = setTimeout("timedCount()", 1000);
-            tf.disposeVariables();
         }
         function stopCount() {
             clearTimeout(t);
@@ -44,7 +43,7 @@
         loadNet();
         async function loadMobilenet() {
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
-            tf.setBackend('webgl',true);
+            tf.setBackend('cpu',true);
             const mobilenet = await tf.loadModel('indexeddb://cloned-model');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);

@@ -50,6 +50,7 @@
         async function loadMobilenet2() {
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
             tf.setBackend('cpu',true);
+            const mobilenet = await tf.loadModel('indexeddb://cloned-model');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat().div(tf.scalar(255));

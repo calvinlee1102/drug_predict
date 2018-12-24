@@ -27,12 +27,8 @@
         }
         var c = 0;
         var t;
-        var predicted = 0;
         function timedCount() {
             c = c + 1;
-            if (predicted == 1) {
-                predicted = 0;
-            }
             t = setTimeout("timedCount()", 1000);
         }
         function stopCount() {
@@ -42,13 +38,11 @@
             timedCount();
             await tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_MobileNetV2/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
+            stopCount();
         }
         loadNet();
-        function cleanModel() {
-            tf.disposeVariables();
-        }
+        tf.setBackend('webgl',true);
         async function loadMobilenet() {
-            tf.setBackend('webgl',true);
             const mobilenet = await tf.loadModel('indexeddb://cloned-model');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
@@ -73,7 +67,6 @@
                 }
             }
             document.getElementById('testdrugvalue').innerHTML = classStr;
-            predicted = 1;
         }
         function drugpicUpload() {
             document.getElementById('storeimg').value = document.getElementById('picUpid').value;
@@ -81,7 +74,7 @@
     </script>
 </head>
 <body>
-    <h1 class="center" style="font-size:36pt;">全台最強藥物辨識187</h1>
+    <h1 class="center" style="font-size:36pt;">全台最強藥物辨識188</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;" class="center">照一張藥錠</button><br />
     <div align="center">
         <img id="storeimg">

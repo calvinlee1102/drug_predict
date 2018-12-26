@@ -28,47 +28,57 @@
         }
         var c = 0;
         var t;
+        var t2;
+        var newimage = 0;
         function timedCount() {
             c = c + 1;
             t = setTimeout("timedCount()", 1000);
         }
         function stopCount() {
+            loadMobilenet();
             clearTimeout(t);
         }
         async function loadNet() {
             timedCount();
             await tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_MobileNetV2/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
+            stopCount();
         }
         loadNet();
         async function loadMobilenet() {
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
-            tf.setBackend('cpu', true);
+            tf.setBackend('webgl', true);
             const mobilenet = await tf.loadModel('indexeddb://cloned-model');
-            const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
-            const croppedImage = this.cropImage(webcamImage);
-            const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat().div(tf.scalar(255));
-            const batchedImage = resized.expandDims(0);
-            classId = (await mobilenet.predict(batchedImage).as1D().data());
-            var classSort = classId.slice();
-            classSort.sort();
-            topk = 10;
-            var topkArrayIndex = new Array();
-            var topkArrayP = new Array();
-            var classStr = '共收錄' + classSort.length + '種藥品<br />';
-            for (i = 1; i <= topk; i++) {
-                for (j = 0; j < classSort.length; j++) {
-                    if (classSort[classSort.length - i] == classId[j]) {
-                        topkArrayIndex[i - 1] = j;
-                        topkArrayP[i - 1] = classId[j];
-                        classStr += classMap[j] + ': ' + (classId[j] * 100).toFixed(1) + '%' + '<br />';
-                        break;
+            for (k = 1, k < 100000, k++) {
+                if (newimage == 1) {
+                    newimage = 0;
+                    const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
+                    const croppedImage = this.cropImage(webcamImage);
+                    const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat().div(tf.scalar(255));
+                    const batchedImage = resized.expandDims(0);
+                    classId = (await mobilenet.predict(batchedImage).as1D().data());
+                    var classSort = classId.slice();
+                    classSort.sort();
+                    topk = 10;
+                    var topkArrayIndex = new Array();
+                    var topkArrayP = new Array();
+                    var classStr = '共收錄' + classSort.length + '種藥品<br />';
+                    for (i = 1; i <= topk; i++) {
+                        for (j = 0; j < classSort.length; j++) {
+                            if (classSort[classSort.length - i] == classId[j]) {
+                                topkArrayIndex[i - 1] = j;
+                                topkArrayP[i - 1] = classId[j];
+                                classStr += classMap[j] + ': ' + (classId[j] * 100).toFixed(1) + '%' + '<br />';
+                                break;
+                            }
+                        }
                     }
+                    document.getElementById('testdrugvalue').innerHTML = classStr;
+                    document.getElementById('enginemode').innerHTML = tf.getBackend();
+                    tf.disposeVariables();
+                    t2 = setTimeout("clearTimeout(t2)", 1000);
                 }
             }
-            document.getElementById('testdrugvalue').innerHTML = classStr;
-            document.getElementById('enginemode').innerHTML = tf.getBackend();
-            tf.disposeVariables();
         }
         function drugpicUpload() {
             document.getElementById('storeimg').src = document.getElementById('picUpid');
@@ -76,7 +86,7 @@
     </script>
 </head>
 <body>
-    <h1 class="center" style="font-size:36pt;">全台最強藥物辨識259</h1>
+    <h1 class="center" style="font-size:36pt;">全台最強藥物辨識260</h1>
     <button onclick="take_snapshot();" style="font-size:28pt;" class="center">照一張藥錠</button><br />
     <div align="center">
         <img id="storeimg">
@@ -96,7 +106,7 @@
         function take_snapshot() {
             Webcam.snap(function (data_uri) {
                 document.getElementById('storeimg').src = data_uri;
-                loadMobilenet();
+                newimage = 1;
             });
         }
     </script>

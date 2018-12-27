@@ -47,14 +47,13 @@
         }
         async function loadNet() {
             timedCount();
-            await tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_InceptionV3/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
         }
         loadNet();
         async function loadMobilenet() {
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
             tf.setBackend('cpu', true);
-            const mobilenet = await tf.loadModel('indexeddb://cloned-model');
+            const mobilenet = await tf.loadModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_InceptionV3/model.json');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat().div(tf.scalar(255));

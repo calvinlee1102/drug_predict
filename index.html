@@ -48,7 +48,7 @@
         }
         async function loadNet() {
             timedCount();
-            await tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/drug_MobileNetV2/model.json', 'indexeddb://cloned-model');
+            await tf.io.copyModel('https://raw.githubusercontent.com/calvinlee1102/drug_predict/master/model.json', 'indexeddb://cloned-model');
             document.getElementById('testdrugvalue').innerHTML = '載入完成, 耗時:' + c + '秒';
         }
         loadNet();

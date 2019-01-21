@@ -104,7 +104,6 @@
             document.getElementById('testdrugvalue').innerHTML = classStr;
             document.getElementById('enginemode').innerHTML = tf.getBackend();
         }
-        loadcosine()
         function drugpicUpload() {
             document.getElementById('storeimg').src = document.getElementById('picUpid');
         }
@@ -131,7 +130,8 @@
         function take_snapshot() {
             Webcam.snap(function (data_uri) {
                 document.getElementById('storeimg').src = data_uri;
-                loadMobilenet();
+                /*loadMobilenet();*/
+                loadcosine();
             });
         }
     </script>

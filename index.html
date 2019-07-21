@@ -53,16 +53,13 @@
         loadNet();
         async function loadMobilenet() {
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
-            tf.setBackend('cpu', true);
+            tf.setBackend('webgl', true);
             const mobilenet = await tf.loadModel('indexeddb://cloned-model');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat().div(tf.scalar(255));
             const batchedImage = resized.expandDims(0);
-            classId = tf.tidy(() => {
-                return await mobilenet.predict(batchedImage).as1D().data();
-            });
-            //classId = (await mobilenet.predict(batchedImage).as1D().data());
+            classId = (await mobilenet.predict(batchedImage).as1D().data());
             var classSort = classId.slice();
             classSort.sort();
             topk = 10;

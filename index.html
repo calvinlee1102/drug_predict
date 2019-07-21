@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-Hant-TW">
 <head>
     <meta http-equiv="Content-Type" CONTENT="text/html; charset=big5">
@@ -59,7 +59,10 @@
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat().div(tf.scalar(255));
             const batchedImage = resized.expandDims(0);
-            classId = (await mobilenet.predict(batchedImage).as1D().data());
+            classId = tf.tidy(() => {
+                return await mobilenet.predict(batchedImage).as1D().data();
+            });
+            //classId = (await mobilenet.predict(batchedImage).as1D().data());
             var classSort = classId.slice();
             classSort.sort();
             topk = 10;

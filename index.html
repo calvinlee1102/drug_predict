@@ -55,7 +55,6 @@
             document.getElementById('testdrugvalue').innerHTML = '計算中...';
             tf.setBackend('webgl', true);
             const mobilenet = await tf.loadModel('indexeddb://cloned-model');
-            const saveResult = await mobilenet.save('downloads://mymodel');
             const webcamImage = tf.fromPixels(document.getElementById("storeimg"));
             const croppedImage = this.cropImage(webcamImage);
             const resized = tf.image.resizeBilinear(croppedImage, [224, 224]).toFloat().div(tf.scalar(255));
@@ -83,7 +82,6 @@
         function drugpicUpload() {
             document.getElementById('storeimg').src = document.getElementById('picUpid');
         }
-        
     </script>
 </head>
 <body>
